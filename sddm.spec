@@ -26,6 +26,9 @@ Source21:       fedora-Main.qml
 Source22:       fedora-metadata.desktop
 Source23:       fedora-theme.conf
 
+# RFRemix
+Patch0:		sddm-0.10.0-system-locale-in-greeter.patch
+
 Provides: service(graphical-login) = sddm
 
 BuildRequires:  cmake
@@ -70,6 +73,7 @@ A collection of sddm themes, including: circles, elarun, maldives, maui.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
 cp %{SOURCE10} src/common/
 
 
@@ -148,6 +152,9 @@ exit 0
 %{_datadir}/sddm/themes/maui/
 
 %changelog
+* Wed Nov 12 2014 Arkady L. Shane <ashejn@russianfedora.ru> - 0.10.0-2.R
+- use system locale in greeter (resolve https://github.com/sddm/sddm/issues/261)
+
 * Mon Oct 27 2014 Rex Dieter <rdieter@fedoraproject.org> - 0.10.0-2
 - create/own %%{_sysconfdir}/sddm.conf, %%{_localstatedir}/lib/sddm (#1155898)
 - don't mark stuff under /etc/dbus-1 %%config

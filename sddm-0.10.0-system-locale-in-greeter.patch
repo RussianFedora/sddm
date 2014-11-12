@@ -1,0 +1,13 @@
+diff -urN sddm-0.10.0.orig/src/daemon/Greeter.cpp sddm-0.10.0/src/daemon/Greeter.cpp
+--- sddm-0.10.0.orig/src/daemon/Greeter.cpp	2014-11-12 12:15:26.052273404 +0300
++++ sddm-0.10.0/src/daemon/Greeter.cpp	2014-11-12 12:16:15.041443536 +0300
+@@ -122,7 +122,9 @@
+                  << "--theme" << m_theme;
+ 
+             // greeter environment
++            QProcessEnvironment sysenv = QProcessEnvironment::systemEnvironment();
+             QProcessEnvironment env;
++            env.insert("LANG", sysenv.value("LANG"));
+             env.insert("PATH", mainConfig.Users.DefaultPath.get());
+             env.insert("DISPLAY", m_display->name());
+             env.insert("XAUTHORITY", m_authPath);
